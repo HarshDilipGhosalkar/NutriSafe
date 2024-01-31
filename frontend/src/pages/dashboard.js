@@ -3,9 +3,9 @@ import React from "react";
 import { useRouter } from "next/router";
 
 const HomePage = () => {
-  const router = useRouter();
 
   const value = 600;
+  const  router = useRouter();
 
   return (
     <>
@@ -40,7 +40,7 @@ const HomePage = () => {
               Get AI generated recipies considering your preference and
               allergies
             </p>
-            <a className="bold text-blue-500 font-bold">Get Recipies &rarr; </a>
+            <a onClick={()=>{router.push('/recipes')}} className="bold text-blue-500 font-bold">Get Recipes &rarr; </a>
           </div>
         </div>
         <div className="flex py-[10px] bg-gray-100 justify-around">

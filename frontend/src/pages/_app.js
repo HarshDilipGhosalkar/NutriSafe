@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
     // <Layout>
     <>
       <Navbar />
-      <div className="pb-[60px] bg-gray-100 min-h-[calc(100vh-133px)]">
+      <div className="pb-[60px] min-h-[calc(100vh-133px)]">
         <Component {...pageProps} />
       </div>
       <BottomBar />
