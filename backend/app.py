@@ -11,7 +11,6 @@ from resources.report import Report
 # from backend.resources.alternateFoodsOld import (AlternateAllergicFoods, AlternateNonAllergicFoods)
 from resources.alternateFoods import (AlternateAllergicFoods, AlternateNonAllergicFoods)
 from mongo_engine import db
-from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 import os
 
