@@ -164,25 +164,28 @@ const selectAllergens = () => {
       myHeaders.append("Content-Type", "application/json");
 
       var raw = JSON.stringify({
-        "mobile_number": "9137357003",
-        "allergens": selectedAllergens,
-        "allergy_foods": selectedFoodItems,
-        "food_preferences": selectedFoodCategory,
+        mobile_number: "9137357003",
+        allergens: selectedAllergens,
+        allergy_foods: selectedFoodItems,
+        food_preferences: selectedFoodCategory,
       });
 
       var requestOptions = {
-        method: 'POST',
+        method: "POST",
         headers: myHeaders,
         body: raw,
-        redirect: 'follow'
+        redirect: "follow",
       };
 
-      fetch("http://localhost:5000/addAllergies", requestOptions)
-        .then(response => {
+      fetch(
+        "https://tsec-hack-all-stackers.vercel.app/addAllergies",
+        requestOptions
+      )
+        .then((response) => {
           console.log(response);
           router.push("/dashboard");
         })
-        .catch(error => console.log('error', error))
+        .catch((error) => console.log("error", error))
         .finally(() => {
           setIsLoading(false);
         });
@@ -302,18 +305,18 @@ const selectAllergens = () => {
         )}
       </div>
 
-      {!isLoading ? 
+      {!isLoading ? (
         <div
           className="w-[90%] h-[40px] flex items-center justify-center mt-auto mb-[20px] self-center rounded-[5px] bg-[#DE8F90] font-semibold text-white cursor-pointer"
           onClick={handleContinue}
         >
           Continue
         </div>
-      :
+      ) : (
         <div className="w-[90%] h-[40px] flex items-center justify-center mt-auto mb-[20px] self-center rounded-[5px] font-semibold text-white cursor-pointer">
-          <ScaleLoader color="#DE8F90"/>
+          <ScaleLoader color="#DE8F90" />
         </div>
-      }
+      )}
     </div>
   );
 };
