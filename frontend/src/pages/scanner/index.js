@@ -2,6 +2,8 @@
 import React, { useRef, useCallback, useEffect, useState } from 'react';
 import Webcam from 'react-webcam';
 import { useRouter } from "next/router";
+import { ScaleLoader } from 'react-spinners';
+
 
 
 const Camera = () => {
@@ -9,7 +11,12 @@ const Camera = () => {
   const webcamRef = useRef(null);
   const [isScanning, setScanning] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
+  const [responseInfo, setResponseInfo] = useState(null);
+  const [loading, setLoading] = useState(false);
 
+  const videoConstraints = {
+    facingMode: 'environment', // Set to 'environment' for back camera
+  };
   const capture = useCallback(() => {
     console.log("clicked1")
     setScanning(true);
@@ -36,7 +43,7 @@ const Camera = () => {
         console.log("clicked")
       const formData = new FormData();
       formData.append('image', capturedImage);
-    //   setLoading(true);
+      setLoading(true);
   
       // Remove or update the Content-Type header
       fetch('https://tsec-hacks.onrender.com/packagedFood', {
@@ -48,15 +55,16 @@ const Camera = () => {
       })
         .then(response => response.json())
         .then(result => {
-          console.log(result)
-          const newItems = result
+            console.log(result.data);
+            setResponseInfo(result.data);
         })
         .finally(() => {
-        //   setLoading(false);
+          setLoading(false);
         })
   
         .catch(error => console.log('error', error));
     } else {
+        console.log(capturedImage)
       console.warn('No image selected');
     }
   };
@@ -83,6 +91,7 @@ const Camera = () => {
           ref={webcamRef}
           screenshotFormat="image/jpeg"
           className={`w-full rounded-[17px]  overflow-hidden  ${isScanning ? 'animate-scanning' : ''}`}
+          videoConstraints={videoConstraints}
         />
         <button
         onClick={capture}
@@ -104,12 +113,34 @@ const Camera = () => {
 
       </div>
       
-      {capturedImage && (
-        <div className="mt-4">
-          <h2 className="text-xl font-semibold mb-2">Captured Image</h2>
-          <img src={capturedImage} alt="Captured" className="max-w-md w-full" />
-        </div>
-      )}
+      {responseInfo && (
+                <div className={`mt-4 p-6 rounded-lg ${responseInfo.can_eat === 'yes' ? 'bg-green-100 border-green-800 border-[1px]' : 'bg-red-100 border-[1px] border-red-800'}`}>
+                  <h2 className={`text-3xl font-semibold ${responseInfo.can_eat === 'yes' ? 'text-green-800 ' : 'text-[#a20220]'} `}>{responseInfo.can_eat === 'yes' ? 'Can Eat' : 'Cannot Eat'}</h2>
+                  <div className="mt-2 flex flex-wrap">
+                    {responseInfo.ingredients.map((ingredient, index) => (
+                      <div key={index} className={`p-2 rounded-md my-2 mr-2 ${responseInfo.can_eat === 'yes' ? 'bg-green-800 text-white' : 'bg-[#f7a6b5] border-[1px] border-[#a20220]'} `}>
+                        {ingredient}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-4">
+                    <strong>Reason:</strong> {responseInfo.reason}
+                  </div>
+                </div>
+              )}
+              {loading ? (
+                <div className="mt-4">
+                  <ScaleLoader color="#2563eb" />
+                  Hold on!
+                </div>
+              ) : (
+                <button
+                  className="mt-4 py-2 px-6 bg-blue-600 text-white rounded-full"
+                  onClick={handleUpload}
+                >
+                  Upload Image
+                </button>
+              )}
     </div>
   );
 };
