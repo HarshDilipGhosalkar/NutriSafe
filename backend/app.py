@@ -8,6 +8,8 @@ from resources.scanner import (PackagedFood, Food)
 from resources.recipe import (Recipe, RecipeFromFoodItemsAtHome)
 from resources.message import Message
 from resources.report import Report
+from resources.ImageToItems import ImageToItems
+from resources.Calories import Calories
 from mongo_engine import db
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
@@ -36,6 +38,9 @@ api.add_resource(Recipe, "/recipe")
 api.add_resource(RecipeFromFoodItemsAtHome, '/recipeFromFoodItemsAtHome')
 api.add_resource(Message, "/message")
 api.add_resource(Report, "/report")
+api.add_resource(ImageToItems, '/imageToItems')
+
+api.add_resource(Calories, '/calculateCalories')
 
 if __name__ == "__main__":
     app.run(debug=True)
