@@ -1,119 +1,180 @@
-// src/components/Camera.js
-import React, { useRef, useCallback, useEffect, useState } from 'react';
-import Webcam from 'react-webcam';
-import { useRouter } from "next/router";
+import { toInteger, toNumber } from 'lodash';
+import React, { useState,useEffect } from 'react';
 import { ScaleLoader } from 'react-spinners';
+const axios = require('axios');
 
-
-
-const Camera = () => {
-  const router = useRouter();
-  const webcamRef = useRef(null);
-  const [isScanning, setScanning] = useState(false);
-  const [capturedImage, setCapturedImage] = useState(null);
+const MyComponent = () => {
+  const [categories, setCategories] = useState([]);
+  const [inputValue, setInputValue] = useState('');
   const [responseInfo, setResponseInfo] = useState(null);
+  // const [image, setImage] = useState(null);
+  const [itemList, setItemList] = useState([]);
+  const [totalCalories, setTotalCalories] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const videoConstraints = {
-    facingMode: 'environment', // Set to 'environment' for back camera
-  };
-  const capture = useCallback(() => {
-    console.log("clicked1")
-    setScanning(true);
-    const imageSrc = webcamRef.current.getScreenshot();
-    setCapturedImage(imageSrc);
+const handleImageChange = (event) => {
+  const file = event.target.files[0];
+  setSelectedImage(file);
+};
 
-    // Simulate a delay for scanning effect
-    setTimeout(() => {
-      setScanning(false);
-    }, 1000);
+const handleUpload = () => {
+  if (selectedImage) {
+    const formData = new FormData();
+    formData.append('image', selectedImage);
+    setLoading(true);
 
-    handleUpload()
-  }, []);
-
-
-//   const handleImageChange = (event) => {
-//     const file = event.target.files[0];
-//     setSelectedImage(file);
-//   };
-  
-  const handleUpload = () => {
-    
-    if (capturedImage) {
-        console.log("clicked")
-      const formData = new FormData();
-      formData.append('image', capturedImage);
-      setLoading(true);
-  
-      // Remove or update the Content-Type header
-      fetch('https://tsec-hacks.onrender.com/packagedFood', {
-        method: 'POST',
-        body: formData,
-        mode: 'cors',
-        headers: {
-        }
+    fetch('https://tsec-hacks.onrender.com/food', {
+      method: 'POST',
+      body: formData,
+      mode: 'cors',
+      headers: {}
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result.data);
+        setResponseInfo(result.data);
+        setLoading(false);
       })
-        .then(response => response.json())
-        .then(result => {
-            console.log(result.data);
-            setResponseInfo(result.data);
-        })
-        .finally(() => {
-          setLoading(false);
-        })
-  
-        .catch(error => console.log('error', error));
-    } else {
-        console.log(capturedImage)
-      console.warn('No image selected');
-    }
+      .catch(error => console.log('error', error));
+  } else {
+    console.warn('No image selected');
+  }
+};
+
+
+
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
   };
 
+  //   const handleImageUpload = (e) => {
+  //     // Handle image upload logic, set 'image' state accordingly
+  //     // For simplicity, let's assume 'e.target.files[0]' contains the image file
+  //     const uploadedImage = e.target.files[0];
+  //     setImage(uploadedImage);
+  //   };
 
+
+
+  
   useEffect(() => {
-    const openCamera = async () => {
-      try {
-        await navigator.mediaDevices.getUserMedia({ video: true });
-      } catch (error) {
-        console.error('Error accessing camera:', error);
-      }
-    };
+    var storedCalories = typeof window !== 'undefined' ? localStorage.getItem('dailyCalories') : null;
 
-    openCamera();
-  }, []);
+    // const storedCalories = localStorage.getItem('dailyCalories');
+    storedCalories=parseInt(storedCalories)+parseInt(totalCalories);
+    localStorage.setItem('dailyCalories',storedCalories);
+
+  }, [totalCalories]);
+
+//   return (
+//     <div className="flex items-center justify-center h-screen">
+//       <div className="w-[100%] h-[100%] pr-4 pt-[20px] flex flex-col justify-center items-center">
+      
+//         <div className='w-[80%] h-[80%] pt-[10px]'>
+//           <div className="flex flex-row w-[100%] mx-auto gap-x-16 justify-center h-[100%]">
+//             <div className="flex flex-col items-center">
+
+//               {selectedImage ?
+//                 <img src={URL.createObjectURL(selectedImage)} alt="image" className="w-[300px] h-[300px]"/>
+//                 :
+//                 <div className="p-8 border-[3px] border-dotted border-gray-300 rounded-lg bg-gray-100 text-center flex flex-col justify-center items-center ">
+//                   <h2 className="text-xl font-semibold ">Upload Food Packet</h2>
+//                   <label className="flex flex-col justify-center items-center mt-4 ">
+//                     <div className="cursor-pointer border-2 border-dotted h-[100%] w-[100%] border-gray-400 px-4 rounded-lg bg-white py-[30px]">
+//                       <svg
+//                         xmlns="http://www.w3.org/2000/svg"
+//                         className="h-16 w-16 mx-auto text-gray-500"
+//                         height="24"
+//                         fill="gray"
+//                         viewBox="0 -960 960 960"
+//                         stroke="currentColor"
+//                       >
+//                         <path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q117 0 198.5 81.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H520q-33 0-56.5-23.5T440-240v-206l-64 62-56-56 160-160 160 160-56 56-64-62v206h220q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-83-58.5-141.5T480-720q-83 0-141.5 58.5T280-520h-20q-58 0-99 41t-41 99q0 58 41 99t99 41h100v80H260Zm220-280Z" />
+//                       </svg>
+//                       <p className="text-gray-500 mt-2">
+//                         Choose a file or drag it here
+//                       </p>
+//                       <input
+//                         className=" hidden"
+//                         type="file"
+//                         accept=".jpg,.png,.jpeg"
+//                         onChange={handleImageChange}
+//                       />
+//                     </div>
+//                   </label>
+//                 </div>
+//               }
+//               {/* <p>{image?.name}</p> */}
+//               {loading ? (
+//                 <div className="mt-4">
+//                   <ScaleLoader color="#2563eb" />
+//                   Hold on!
+//                 </div>
+//               ) : (
+//                 <button
+//                   className="mt-4 py-2 px-6 bg-blue-600 text-white rounded-full"
+//                   onClick={handleUpload}
+//                 >
+//                   Upload Image
+//                 </button>
+//               )}
+//             </div>
+
+//           </div>
+//         </div>
+//       </div>
+      
+//     </div>
+//   );
+// };
+
+// export default MyComponent;
+
+
+// ... (previous imports)
+
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-200">
-      <h1 className=" mb-[15px] text-4xl font-md mt-4">Scan Food</h1>
-      <div className="flex flex-col  items-center relative w-[80%] h-4/5 rounded-[17px] overflow-hidden">
-        <Webcam
-          audio={false}
-          ref={webcamRef}
-          screenshotFormat="image/jpeg"
-          className={`w-full rounded-[17px]  overflow-hidden  ${isScanning ? 'animate-scanning' : ''}`}
-          videoConstraints={videoConstraints}
-        />
-        <button
-        onClick={capture}
-        className=" mt-[25px] bg-blue-500 text-white px-6 py-2 rounded-md focus:outline-none"
-      >
-        Capture Image
-      </button>
-
-      <div className="flex items-center my-2 space-x-2">
-          <span className="text-gray-500">OR</span>
-          <div className="border-t border-gray-500 flex-1"></div>
-        </div>
-        <button
-          onClick={() => router.push("/packaged")}
-          className="bg-green-500 text-white px-6 py-2 rounded-md focus:outline-none"
-        >
-          Upload Food Image
-        </button>
-
-      </div>
-      
-      {responseInfo && (
+    <div className="flex items-center justify-center h-screen">
+      <div className="w-[100%] h-[100%] pr-4 pt-[20px] flex flex-col justify-center items-center">
+        <div className='w-[80%] h-[80%] pt-[10px]'>
+          <div className="flex flex-row w-[100%] mx-auto gap-x-16 justify-center h-[100%]">
+            <div className="flex flex-col items-center">
+            {selectedImage ?
+                <img src={URL.createObjectURL(selectedImage)} alt="image" className="w-[300px] h-[300px]"/>
+                :
+                <div className="p-8 border-[3px] border-dotted border-gray-300 rounded-lg bg-gray-100 text-center flex flex-col justify-center items-center ">
+                  <h2 className="text-xl font-semibold ">Upload Cooked Food</h2>
+                  <label className="flex flex-col justify-center items-center mt-4 ">
+                    <div className="cursor-pointer border-2 border-dotted h-[100%] w-[100%] border-gray-400 px-4 rounded-lg bg-white py-[30px]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-16 w-16 mx-auto text-gray-500"
+                        height="24"
+                        fill="gray"
+                        viewBox="0 -960 960 960"
+                        stroke="currentColor"
+                      >
+                        <path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q117 0 198.5 81.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H520q-33 0-56.5-23.5T440-240v-206l-64 62-56-56 160-160 160 160-56 56-64-62v206h220q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-83-58.5-141.5T480-720q-83 0-141.5 58.5T280-520h-20q-58 0-99 41t-41 99q0 58 41 99t99 41h100v80H260Zm220-280Z" />
+                      </svg>
+                      <p className="text-gray-500 mt-2">
+                        Choose a file or drag it here
+                      </p>
+                      <input
+                        className=" hidden"
+                        type="file"
+                        accept=".jpg,.png,.jpeg,.webp"
+                        onChange={handleImageChange}
+                      />
+                    </div>
+                  </label>
+                </div>
+              }
+              {/* <p>{image?.name}</p> */}
+              
+              {responseInfo && (
                 <div className={`mt-4 p-6 rounded-lg ${responseInfo.can_eat === 'yes' ? 'bg-green-100 border-green-800 border-[1px]' : 'bg-red-100 border-[1px] border-red-800'}`}>
                   <h2 className={`text-3xl font-semibold ${responseInfo.can_eat === 'yes' ? 'text-green-800 ' : 'text-[#a20220]'} `}>{responseInfo.can_eat === 'yes' ? 'Can Eat' : 'Cannot Eat'}</h2>
                   <div className="mt-2 flex flex-wrap">
@@ -141,8 +202,12 @@ const Camera = () => {
                   Upload Image
                 </button>
               )}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Camera;
+export default MyComponent;
