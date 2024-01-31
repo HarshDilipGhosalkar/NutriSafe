@@ -39,7 +39,7 @@ const Camera = () => {
     //   setLoading(true);
   
       // Remove or update the Content-Type header
-      fetch('http://127.0.0.1:5000/packagedFood', {
+      fetch('https://tsec-hacks.onrender.com/packagedFood', {
         method: 'POST',
         body: formData,
         mode: 'cors',

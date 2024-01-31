@@ -25,7 +25,7 @@ const handleUpload = () => {
     setLoading(true);
 
     // Remove or update the Content-Type header
-    fetch('http://127.0.0.1:5000/imageToItems', {
+    fetch('https://tsec-hacks.onrender.com/imageToItems', {
       method: 'POST',
       body: formData,
       mode: 'cors',
@@ -80,7 +80,7 @@ const handleUpload = () => {
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://127.0.0.1:5000/calculateCalories',
+        url: 'https://tsec-hacks.onrender.com/calculateCalories',
         headers: {
           'Content-Type': 'application/json'
         },

@@ -24,7 +24,7 @@ const AlertComponent = () => {
             redirect: 'follow'
         };
 
-        fetch("http://127.0.0.1:5000/report", requestOptions)
+        fetch("https://tsec-hacks.onrender.com/report", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result);
@@ -42,7 +42,7 @@ const AlertComponent = () => {
             redirect: 'follow'
         };
 
-        fetch("http://127.0.0.1:5000/report", requestOptions)
+        fetch("https://tsec-hacks.onrender.com/report", requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result.data);
