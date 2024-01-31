@@ -1,4 +1,3 @@
-import Layout from "@/components/Layout";
 import { BottomBar } from "@/components/bottomBar";
 import Navbar from "@/components/navbar";
 import "@/styles/globals.css";
@@ -10,7 +9,9 @@ export default function App({ Component, pageProps }) {
     // <Layout>
     <>
       <Navbar />
-      <Component {...pageProps} />
+      <div className="pb-[80px]">
+        <Component {...pageProps} />
+      </div>
       <BottomBar />
     </>
     // </Layout>
