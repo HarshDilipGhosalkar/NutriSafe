@@ -178,7 +178,7 @@ const selectAllergens = () => {
       };
 
       fetch(
-        "https://tsec-hack-all-stackers.vercel.app/addAllergies",
+        "https://tsec-hacks.onrender.com/addAllergies",
         requestOptions
       )
         .then((response) => {

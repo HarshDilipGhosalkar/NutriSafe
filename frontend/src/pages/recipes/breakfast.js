@@ -29,7 +29,7 @@ const Breakfast = () => {
         };
 
         const response = await fetch(
-          "https://tsec-hack-all-stackers.vercel.app/recipe",
+          "https://tsec-hacks.onrender.com/recipe",
           requestOptions
         );
         const result = await response.json();
