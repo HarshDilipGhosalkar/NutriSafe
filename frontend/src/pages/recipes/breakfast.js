@@ -77,7 +77,7 @@ const Breakfast = () => {
 
           <TabsContent value="instruction">
             <div className="p-[15px]">
-              <div className="flex flex-col bg-gray-100">
+              <div className="flex flex-col">
                 <h2 className="text-2xl font-bold mb-4">Instructions</h2>
                 <InstructionCard instructions={instruction} />
               </div>

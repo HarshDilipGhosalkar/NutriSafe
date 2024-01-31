@@ -5,15 +5,15 @@ const Recipies = () => {
   const router = useRouter();
   return (
     <div>
-      <div className="w-full mb-[20px]">
-        <img className="rounded-t-[20px]" src="assets/header.png"></img>
+      <div className="w-full">
+        <img className="" src="assets/header.png"></img>
       </div>
       <div className="px-[10px]">
         <h1 className="font-bold text-3xl mb-[20px]">Select Category</h1>
         <div className="flex flex-col gap-y-[20px]">
           <div
             className="h-[100px] pl-[20px] flex items-center rounded-[20px] bg-[#ffefcb] overflow-hidden"
-            onClick={() => router.push("/breakfast")}
+            onClick={() => router.push("/recipes/breakfast")}
           >
             <div className="py-[10px]">
               <p className="font-bold text-xl">Breakfast</p>
@@ -28,7 +28,7 @@ const Recipies = () => {
           </div>
           <div
             className="h-[100px] pl-[20px] flex items-center rounded-[20px] bg-[#ceedff] overflow-hidden"
-            onClick={() => router.push("/lunch")}
+            onClick={() => router.push("/recipes/lunch")}
           >
             <div className="py-[10px] pr-[10px]">
               <p className="font-bold text-xl">Lunch</p>
@@ -38,7 +38,10 @@ const Recipies = () => {
             </div>
             <img className="h-[100%] mr-[-35px]" src="assets/lunch.png"></img>
           </div>
-          <div className="h-[100px] pl-[20px] flex items-center rounded-[20px] bg-[#ffcece] overflow-hidden">
+          <div
+            className="h-[100px] pl-[20px] flex items-center rounded-[20px] bg-[#ffcece] overflow-hidden"
+            onClick={() => router.push("/recipes/dinner")}
+          >
             <div className="py-[10px] pr-[10px]">
               <p className="font-bold text-xl">Dinner</p>
               <p className="text-gray-600">

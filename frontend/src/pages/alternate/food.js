@@ -36,7 +36,7 @@ const foods = [
 ];
 const Food = () => {
   return (
-    <div>
+    <div className="mt-[20px]">
       <div className="flex gap-x-[10px] px-[20px]">
         <input className="w-full py-[10px] px-[20px] bg-blue-100 rounded-[10px]" />
         <button className="bg-green-400 rounded-[10px] px-[10px] text-white font-bold py-[10px]">
@@ -59,17 +59,18 @@ const Food = () => {
       <div className="pt-[20px]">
         {foods ? (
           <div className="mt-[10px] px-[20px]">
+            <h1 className="text-2xl font-bold pb-[10px]">Alternatives</h1>
             {foods.map((item, id) => (
               <div
                 key={id}
-                className="flex px-[20px] mb-[15px] bg-gray-100 border-gray-300 py-[5px] border-[1px] rounded-[10px] items-center justify-between"
+                className="flex pl-[20px] pr-[5px] mb-[15px] bg-gray-100 border-gray-300 py-[5px] border-[1px] rounded-[10px] items-center justify-between"
               >
-                <p className="font-bold text-xl">
+                <p className="text-xl">
                   <span className="mr-[10px]">{id + 1}. </span> {item.food}
                 </p>
                 <a href={item.buy_link}>
                   <img
-                    className="h-[35px] w-[35px]"
+                    className="h-[40px] w-[40px]"
                     src="/assets/Blinkit.svg"
                   />
                 </a>

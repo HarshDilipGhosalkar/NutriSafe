@@ -1,32 +1,32 @@
 import React from "react";
 
 const foods = [
-    "yogurt",
-    "cheese",
-    "butter",
-    "sour cream",
-    "ice cream",
-    "milk chocolate",
-    "whey protein",
-    "casein",
-    "lactose",
-    "milk powder",
-    "nonfat dry milk",
-    "condensed milk",
-    "evaporated milk",
-    "goat milk",
-    "sheep milk",
-    "buffalo milk",
-    "camel milk",
-    "mare milk",
-    "donkey milk",
-    "yak milk",
-    "reindeer milk",
-  ]
+  "yogurt",
+  "cheese",
+  "butter",
+  "sour cream",
+  "ice cream",
+  "milk chocolate",
+  "whey protein",
+  "casein",
+  "lactose",
+  "milk powder",
+  "nonfat dry milk",
+  "condensed milk",
+  "evaporated milk",
+  "goat milk",
+  "sheep milk",
+  "buffalo milk",
+  "camel milk",
+  "mare milk",
+  "donkey milk",
+  "yak milk",
+  "reindeer milk",
+];
 
-  const AllergenFood = () => {
+const AllergenFood = () => {
   return (
-    <div>
+    <div className="mt-[20px]">
       <div className="flex gap-x-[10px] px-[20px]">
         <input className="w-full py-[10px] px-[20px] bg-blue-100 rounded-[10px]" />
         <button className="bg-green-400 rounded-[10px] px-[10px] text-white font-bold py-[10px]">
@@ -54,8 +54,8 @@ const foods = [
                 key={id}
                 className="flex px-[20px] mb-[15px] bg-gray-100 border-gray-300 py-[5px] border-[1px] rounded-[10px] items-center justify-between"
               >
-                <p className="font-bold text-xl">
-                <span className="mr-[10px]">{id + 1}. </span> {item}
+                <p className="text-xl">
+                  <span className="mr-[10px]">{id + 1}. </span> {item}
                 </p>
               </div>
             ))}
