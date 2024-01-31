@@ -5,6 +5,7 @@ from flask import Flask, jsonify, request
 from flask_restful import Api
 from resources.user import (Signup, Login, Allergies)
 from resources.scanner import (PackagedFood, Food)
+from resources.recipe import (Recipe, RecipeFromFoodItemsAtHome)
 from mongo_engine import db
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
@@ -29,6 +30,8 @@ api.add_resource(Login, "/login")
 api.add_resource(Allergies, "/addAllergies")
 api.add_resource(PackagedFood, "/packagedFood")
 api.add_resource(Food, "/food")
+api.add_resource(Recipe, "/recipe")
+api.add_resource(RecipeFromFoodItemsAtHome, '/recipeFromFoodItemsAtHome')
 
 if __name__ == "__main__":
     app.run(debug=True)
