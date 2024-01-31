@@ -46,9 +46,9 @@ const HomePage = () => {
         <div className="flex py-[10px] bg-gray-100 justify-around">
           <div className="flex w-[33%] flex-col items-center">
             <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
-              <img className="w-[40px]" src="assets/kcal.png" />
+              <img className="w-[40px]" src="assets/warning.png" />
             </div>
-            <p className="font-bold text-gray-600">Calories</p>
+            <p className="font-bold text-gray-600">Report</p>
           </div>
           <div className="flex w-[33%] flex-col items-center">
             <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
