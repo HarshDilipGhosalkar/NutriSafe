@@ -96,7 +96,6 @@ class Recipe(Resource):
         food_preferences = user["food_preferences"]
 
         response = llm.invoke(prompt.format(allergens=allergens, allergy_foods=allergy_foods, food_preferences=food_preferences, time=args["time"]))
-        print(response.content)
 
         return {"error": False, "data": json.loads(response.content)}, 200
 
