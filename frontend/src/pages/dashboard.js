@@ -1,7 +1,10 @@
 import React from "react";
-import CircularProgressBar from "../components/CircularProgressBar";
+// import CircularProgressBar from "../components/CircularProgressBar";
+import { useRouter } from "next/router";
 
 const HomePage = () => {
+  const router = useRouter();
+
   const value = 600;
 
   return (
@@ -17,7 +20,10 @@ const HomePage = () => {
               Scan Packet Food
             </p>
           </div>
-          <div className="w-[50%] rounded-[20px] p-[10px] items-center border-[1px] rounded-lg">
+          <div 
+          className="w-[50%] rounded-[20px] p-[10px] items-center border-[1px] rounded-lg"
+          onClick={()=>router.push("/scanner")}
+          >
             <img
               className="mb-[10px] rounded-[20px]"
               src="assets/food.png"
