@@ -7,6 +7,7 @@ from resources.user import (Signup, Login, Allergies)
 from resources.scanner import (PackagedFood, Food)
 from resources.recipe import (Recipe, RecipeFromFoodItemsAtHome)
 from resources.message import Message
+from resources.report import Report
 from mongo_engine import db
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
@@ -34,6 +35,7 @@ api.add_resource(Food, "/food")
 api.add_resource(Recipe, "/recipe")
 api.add_resource(RecipeFromFoodItemsAtHome, '/recipeFromFoodItemsAtHome')
 api.add_resource(Message, "/message")
+api.add_resource(Report, "/report")
 
 if __name__ == "__main__":
     app.run(debug=True)
