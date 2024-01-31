@@ -22,6 +22,7 @@ const handleUpload = () => {
   if (selectedImage) {
     const formData = new FormData();
     formData.append('image', selectedImage);
+    setLoading(true);
 
     fetch('https://tsec-hacks.onrender.com/packagedFood', {
       method: 'POST',
@@ -33,6 +34,7 @@ const handleUpload = () => {
       .then(result => {
         console.log(result.data);
         setResponseInfo(result.data);
+        setLoading(false);
       })
       .catch(error => console.log('error', error));
   } else {
@@ -56,7 +58,7 @@ const handleUpload = () => {
 
 
 
-
+  
   useEffect(() => {
     var storedCalories = typeof window !== 'undefined' ? localStorage.getItem('dailyCalories') : null;
 
@@ -144,7 +146,7 @@ const handleUpload = () => {
                 <img src={URL.createObjectURL(selectedImage)} alt="image" className="w-[300px] h-[300px]"/>
                 :
                 <div className="p-8 border-[3px] border-dotted border-gray-300 rounded-lg bg-gray-100 text-center flex flex-col justify-center items-center ">
-                  <h2 className="text-xl font-semibold ">Upload Food Packet</h2>
+                  <h2 className="text-xl font-semibold ">Upload Packaged Food</h2>
                   <label className="flex flex-col justify-center items-center mt-4 ">
                     <div className="cursor-pointer border-2 border-dotted h-[100%] w-[100%] border-gray-400 px-4 rounded-lg bg-white py-[30px]">
                       <svg

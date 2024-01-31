@@ -10,7 +10,9 @@ const HomePage = () => {
     <>
       <div className="mt-[20px] flex flex-col">
         <div className="flex mb-[20px] px-[10px] gap-x-[20px]">
-          <div className="w-[50%] rounded-[20px] p-[10px] border-[1px] rounded-lg">
+          <div 
+          className="w-[50%] rounded-[20px] p-[10px] border-[1px] rounded-lg"
+          onClick={() => router.push("/packaged")}>
             <img
               className="mb-[10px] rounded-[20px]"
               src="assets/packet.png"
@@ -72,6 +74,14 @@ const HomePage = () => {
               </div>
               <p className="font-bold text-gray-600">Recommend</p>
             </div>
+          </div>
+        </div>
+        <div className="p-[10px]">
+          <div
+            className="rounded-lg border-[1px] shadow-lg border-gray-300 p-[10px]"
+            onClick={() => router.push("/maps")}
+          >
+            <img className="rounded-lg" src="assets/map.png"></img>
           </div>
         </div>
       </div>
