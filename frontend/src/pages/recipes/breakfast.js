@@ -24,6 +24,18 @@ const instruction = [
   "Serve hot with chutney or yogurt.",
 ];
 
+const details = {
+  name: "Jain Besan Chilla",
+  details: {
+    nutrients: {
+      calories: "200",
+      carbohydrates: "20g",
+      fat: "10g",
+      protein: "10g",
+    },
+  },
+};
+
 const Breakfast = () => {
   return (
     <div>
@@ -41,15 +53,17 @@ const Breakfast = () => {
               Instructions
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="details" className="mt-[10px] py-[10px]">
-            <p className="px-[10px]">
-              Spaghetti Carbonara, a classic Italian dish, features al dente
-              pasta tossed in a creamy sauce of eggs, Pecorino Romano cheese,
-              pancetta, and black pepper. The savory pancetta adds depth, while
-              the cheese and eggs create a velvety coating. It's a comforting
-              and flavorful masterpiece, beloved for its simplicity and rich
-              flavors.
-            </p>
+          <TabsContent value="details" className="mt-[10px] py-[10px] px-[15px]">
+            <div className="px-[10px] rounded-lg border-[1px] border-red-300 bg-red-100 px-[20px] p-[10px]">
+              <h1 className="text-2xl mb-[20px]">{details.name}</h1>
+              <h1 className="text-xl font-bold">Nutrients:</h1>
+              <div className="text-xl">
+                <p className="text-red-700">Calories: {details.details.nutrients.calories}</p>
+                <p className="text-green-700">Carbohydrates: {details.details.nutrients.carbohydrates}</p>
+                <p className="text-yellow-600">Fat: {details.details.nutrients.fat}</p>
+                <p className="text-blue-700">Protein: {details.details.nutrients.protein}</p>
+              </div>
+            </div>
           </TabsContent>
           <TabsContent value="incredient">
             <div className="p-[15px]">
