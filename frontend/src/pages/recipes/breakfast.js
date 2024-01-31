@@ -1,46 +1,63 @@
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState, useEffect } from "react";
 import InstructionCard from "@/components/InstructionCard";
 
-const ingredients = [
-  "1 cup besan (chickpea flour)",
-  "1/2 teaspoon salt",
-  "1/2 teaspoon baking soda",
-  "1/4 teaspoon turmeric powder",
-  "1/4 teaspoon red chili powder",
-  "1/4 teaspoon ginger-garlic paste",
-  "1/4 cup chopped coriander leaves",
-  "1/4 cup chopped green chilies",
-  "1 tablespoon oil",
-  "2 cups water",
-];
-
-const instruction = [
-  "In a large bowl, whisk together the besan, salt, baking soda, turmeric powder, red chili powder, ginger-garlic paste, coriander leaves, and green chilies.",
-  "Gradually add water, whisking constantly, until a smooth batter is formed.",
-  "Heat the oil in a nonstick pan over medium heat.",
-  "Pour a ladleful of batter onto the pan and spread it out into a thin circle.",
-  "Cook for 2-3 minutes per side, or until golden brown.",
-  "Serve hot with chutney or yogurt.",
-];
-
-const details = {
-  name: "Jain Besan Chilla",
-  details: {
-    nutrients: {
-      calories: "200",
-      carbohydrates: "20g",
-      fat: "10g",
-      protein: "10g",
-    },
-  },
-};
-
 const Breakfast = () => {
+  const [ingredients, setIngredients] = useState([]);
+  const [instruction, setInstruction] = useState([]);
+  const [details, setDetails] = useState({
+    name: "",
+    details: { nutrients: {} },
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+          time: "breakfast",
+        });
+
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        const response = await fetch(
+          "http://localhost:5000/recipe",
+          requestOptions
+        );
+        const result = await response.json();
+
+        if (!result.error && result.data) {
+          const { name, details, ingredients, instructions } = result.data;
+          setIngredients(ingredients);
+          setInstruction(instructions);
+          setDetails({ name, details });
+        } else {
+          console.error("Error fetching recipe data:", result.error);
+        }
+      } catch (error) {
+        console.error("Error fetching recipe data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <div>
-      <div className="h-[150px] bg-red-100">IMAGE</div>
-      <div className="p-[10px]">
+      <div
+        className="h-[150px] bg-center bg-cover bg-red-100"
+        style={{ backgroundImage: 'url("/assets/breakfast.png")' }}
+      >
+        <div className="min-w-full min-h-full bg-[#0000004d]"></div>
+      </div>
+      <div className="p-[10px] shadow-top-lg">
         <Tabs defaultValue="details" className="w-full">
           <TabsList className="flex gap-x-[20px]">
             <TabsTrigger className="rounded-full" value="details">
@@ -53,15 +70,26 @@ const Breakfast = () => {
               Instructions
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="details" className="mt-[10px] py-[10px] px-[15px]">
+          <TabsContent
+            value="details"
+            className="mt-[10px] py-[10px] px-[15px]"
+          >
             <div className="px-[10px] rounded-lg border-[1px] border-red-300 bg-red-100 px-[20px] p-[10px]">
               <h1 className="text-2xl mb-[20px]">{details.name}</h1>
               <h1 className="text-xl font-bold">Nutrients:</h1>
               <div className="text-xl">
-                <p className="text-red-700">Calories: {details.details.nutrients.calories}</p>
-                <p className="text-green-700">Carbohydrates: {details.details.nutrients.carbohydrates}</p>
-                <p className="text-yellow-600">Fat: {details.details.nutrients.fat}</p>
-                <p className="text-blue-700">Protein: {details.details.nutrients.protein}</p>
+                <p className="text-red-700">
+                  Calories: {details.details.nutrients.calories}
+                </p>
+                <p className="text-green-700">
+                  Carbohydrates: {details.details.nutrients.carbohydrates}
+                </p>
+                <p className="text-yellow-600">
+                  Fat: {details.details.nutrients.fat}
+                </p>
+                <p className="text-blue-700">
+                  Protein: {details.details.nutrients.protein}
+                </p>
               </div>
             </div>
           </TabsContent>

@@ -74,6 +74,14 @@ const HomePage = () => {
             </div>
           </div>
         </div>
+        <div className="p-[10px]">
+          <div
+            className="rounded-lg border-[1px] shadow-lg border-gray-300 p-[10px]"
+            onClick={() => router.push("/maps")}
+          >
+            <img className="rounded-lg" src="assets/map.png"></img>
+          </div>
+        </div>
       </div>
     </>
   );
