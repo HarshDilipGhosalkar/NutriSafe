@@ -1,12 +1,14 @@
 import React from "react";
-import CircularProgressBar from "../components/CircularProgressBar";
+// import CircularProgressBar from "../components/CircularProgressBar";
+import { useRouter } from "next/router";
 
 const HomePage = () => {
   const value = 600;
+  const router = useRouter();
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="mt-[20px] flex flex-col">
         <div className="flex mb-[20px] px-[10px] gap-x-[20px]">
           <div className="w-[50%] rounded-[20px] p-[10px] border-[1px] rounded-lg">
             <img
@@ -17,7 +19,10 @@ const HomePage = () => {
               Scan Packet Food
             </p>
           </div>
-          <div className="w-[50%] rounded-[20px] p-[10px] items-center border-[1px] rounded-lg">
+          <div
+            className="w-[50%] rounded-[20px] p-[10px] items-center border-[1px] rounded-lg"
+            onClick={() => router.push("/scanner")}
+          >
             <img
               className="mb-[10px] rounded-[20px]"
               src="assets/food.png"
@@ -34,27 +39,39 @@ const HomePage = () => {
               Get AI generated recipies considering your preference and
               allergies
             </p>
-            <a className="bold text-blue-500 font-bold">Get Recipies &rarr; </a>
+            <a
+              onClick={() => {
+                router.push("/recipes");
+              }}
+              className="bold text-blue-500 font-bold"
+            >
+              Get Recipes &rarr;{" "}
+            </a>
           </div>
         </div>
-        <div className="flex py-[10px] bg-gray-100 justify-around">
-          <div className="flex w-[33%] flex-col items-center">
-            <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
-              <img className="w-[40px]" src="assets/kcal.png" />
+        <div className="p-[10px]">
+          <div className="flex py-[15px] rounded-[10px] border-[1px] justify-around">
+            <div className="flex w-[33%] flex-col items-center">
+              <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
+                <img className="w-[40px]" src="assets/warning.png" />
+              </div>
+              <p className="font-bold text-gray-600">Report</p>
             </div>
-            <p className="font-bold text-gray-600">Calories</p>
-          </div>
-          <div className="flex w-[33%] flex-col items-center">
-            <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
-              <img className="w-[40px]" src="assets/rice.png" />
+            <div
+              className="flex w-[33%] flex-col items-center"
+              onClick={() => router.push("/alternate")}
+            >
+              <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
+                <img className="w-[40px]" src="assets/rice.png" />
+              </div>
+              <p className="font-bold text-gray-600">Alternate Food</p>
             </div>
-            <p className="font-bold text-gray-600">Alternate Food</p>
-          </div>
-          <div className="flex w-[33%] flex-col items-center">
-            <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
-              <img className="w-[40px]" src="assets/vegetables.png" />
+            <div className="flex w-[33%] flex-col items-center">
+              <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
+                <img className="w-[40px]" src="assets/vegetables.png" />
+              </div>
+              <p className="font-bold text-gray-600">Recommend</p>
             </div>
-            <p className="font-bold text-gray-600">Recommend</p>
           </div>
         </div>
       </div>
