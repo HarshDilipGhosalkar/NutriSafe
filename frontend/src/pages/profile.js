@@ -1,6 +1,7 @@
 // import { AppContext } from "@/context/appContext";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { ScaleLoader } from "react-spinners";
 
 const Category = [
   {
@@ -121,8 +122,8 @@ const selectAllergens = () => {
 
   const [selectedFoodCategory, setSelectedFoodCategory] = useState("");
   const [selectedAllergens, setSelectedAllergens] = useState([]);
-
   const [selectedFoodItems, setSelectedFoodItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onBackClickHandler = () => {
     router.back();
@@ -158,7 +159,33 @@ const selectAllergens = () => {
       setCurrentStep("allergens_items");
       setCurrentStepCount(75);
     } else if (currentStep == "allergens_items") {
-      null;
+      setIsLoading(true);
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        "mobile_number": "9137357003",
+        "allergens": selectedAllergens,
+        "allergy_foods": selectedFoodItems,
+        "food_preferences": selectedFoodCategory,
+      });
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      fetch("http://localhost:5000/addAllergies", requestOptions)
+        .then(response => {
+          console.log(response);
+          router.push("/dashboard");
+        })
+        .catch(error => console.log('error', error))
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
   };
 
@@ -275,12 +302,18 @@ const selectAllergens = () => {
         )}
       </div>
 
-      <div
-        className="w-[90%] h-[40px] flex items-center justify-center mt-auto mb-[20px] self-center rounded-[5px] bg-[#DE8F90] font-semibold text-white cursor-pointer"
-        onClick={handleContinue}
-      >
-        Continue
-      </div>
+      {!isLoading ? 
+        <div
+          className="w-[90%] h-[40px] flex items-center justify-center mt-auto mb-[20px] self-center rounded-[5px] bg-[#DE8F90] font-semibold text-white cursor-pointer"
+          onClick={handleContinue}
+        >
+          Continue
+        </div>
+      :
+        <div className="w-[90%] h-[40px] flex items-center justify-center mt-auto mb-[20px] self-center rounded-[5px] font-semibold text-white cursor-pointer">
+          <ScaleLoader color="#DE8F90"/>
+        </div>
+      }
     </div>
   );
 };
