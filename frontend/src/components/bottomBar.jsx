@@ -7,7 +7,7 @@ export const BottomBar = () => {
     <div className="navbar h-[55px] bg-white py-[15px] border-[1px] shadow-top-lg px-[10px] flex items-center justify-around px-4 py-2">
       <button
         className="flex items-center gap-x-[10px]"
-        onClick={() => router.push("/dashboard")}
+        onClick={() => router.push("/")}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

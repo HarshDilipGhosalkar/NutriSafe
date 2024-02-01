@@ -1,7 +1,7 @@
 // import React from "react";
 import { useState, React, useEffect } from "react";
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css'; // Import default styles
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css"; // Import default styles
 import { Chart } from "chart.js";
 import { useRouter } from "next/router";
 
@@ -10,30 +10,40 @@ const HomePage = () => {
   const router = useRouter();
   const [totalCalories, setTotalCalories] = useState(0);
 
-
   useEffect(() => {
-    var storedCalories = typeof window !== 'undefined' ? localStorage.getItem('dailyCalories') : null;
+    var storedCalories =
+      typeof window !== "undefined"
+        ? localStorage.getItem("dailyCalories")
+        : null;
 
     // const storedCalories = localStorage.getItem('dailyCalories');
     // storedCalories=parseInt(storedCalories)+parseInt(totalCalories);
     // const calory=localStorage.getItem('dailyCalories');
     setTotalCalories(storedCalories);
-
   }, [totalCalories]);
 
   useEffect(() => {
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById("myChart").getContext("2d");
     var myChart = new Chart(ctx, {
-      type: 'line',
+      type: "line",
       data: {
-        labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        datasets: [{
-          data: [100,180,260,140,200,130,250],
-          label: "Calorie",
-          borderColor: "rgb(255,165,0)",
-          backgroundColor: "rgb(255,165,0,0.1)",
-        },
-        ]
+        labels: [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
+        datasets: [
+          {
+            data: [100, 180, 260, 140, 200, 130, 250],
+            label: "Calorie",
+            borderColor: "rgb(255,165,0)",
+            backgroundColor: "rgb(255,165,0,0.1)",
+          },
+        ],
       },
       options: {
         scales: {
@@ -42,11 +52,11 @@ const HomePage = () => {
             ticks: {
               stepSize: 50,
             },
-          }
-        }
-      }
+          },
+        },
+      },
     });
-  }, [])
+  }, []);
 
   return (
     <>
@@ -54,85 +64,40 @@ const HomePage = () => {
         <div className="rounded-[10px] w-[95%] h-[220px] bg-white mb-4 flex justify-evenly items-center border bottom-1 ">
           <div className="w-[45%] h-[100%]  flex flex-col justify-center items-center">
             <div className="w-[70%] h-[50%]">
-
               <CircularProgressbar
                 value={(totalCalories / 1600) * 100}
                 text={totalCalories}
                 strokeWidth={8}
                 styles={buildStyles({
-                  pathColor: '#ffa500',
-                  textColor: '#ffa500',
-                  trailColor: '#f9f2e2',
-                  textSize: '1.5rem', // Set your desired text size
-                  fontWeight: 'bold',
-                  pathTransitionDuration: 0.6 // Set your desired color for the trail
+                  pathColor: "#ffa500",
+                  textColor: "#ffa500",
+                  trailColor: "#f9f2e2",
+                  textSize: "1.5rem", // Set your desired text size
+                  fontWeight: "bold",
+                  pathTransitionDuration: 0.6, // Set your desired color for the trail
                 })}
               />
-
             </div>
-            <button class="bg-blue-400 mt-7   h-8 text-white rounded-[25px] px-3 font-bold transition duration-300 hover:bg-blue-600"
-              onClick={() => router.push("/calory")}>
+            <button
+              class="bg-blue-400 mt-7   h-8 text-white rounded-[25px] px-3 font-bold transition duration-300 hover:bg-blue-600"
+              onClick={() => router.push("/calory")}
+            >
               Add Calori
             </button>
           </div>
           <div className="w-[50%] h-[100%] bg-slate-50">
-            {/* <div className="flex w-[50%] px-[10px] py-[20px]">
-            <div className="flex flex-col bg-white rounded-[20px] px-[20px] py-[25px] box-border w-[100%] h-[400px] font-medium font-Lexend text-[18px] text-dark1">
-              <div className="mb-[10px]">Health Analytics</div>
-
-              <Tabs defaultValue="Steps Count" className="w-[400px]">
-                <TabsList>
-                  <TabsTrigger
-                    onClick={() => fetchData("steps_count")}
-                    value="Steps Count"
-                  >
-                    Steps Count
-                  </TabsTrigger>
-                  <TabsTrigger
-                    onClick={() => fetchData("calories_expended")}
-                    value="Calories Burned"
-                  >
-                    Calories Burned
-                  </TabsTrigger>
-                  <TabsTrigger
-                    onClick={() => {
-                      const labels = watchData.labels;
-                      const values = [106, 115, 0, 0, 90, 120, 110];
-                      setWatchData({ labels: labels, values: values });
-                    }}
-                    value="Heart Rate"
-                  >
-                    Heart Rate
-                  </TabsTrigger>
-                </TabsList>
-                <div>
-                  <TabsContent value="Steps Count">
-                    <h1>Weekly Step Count</h1>
-                  </TabsContent>
-                  <TabsContent value="Calories Burned">
-                    <h1>Weekly Calories Burned</h1>
-                  </TabsContent>
-                  <TabsContent value="Heart Rate">
-                    <h1>Weekly Heart Rate</h1>
-                  </TabsContent>
-                  {watchData && <BarGraph data={watchData} />}
-                </div>
-              </Tabs>
-            </div>
-          </div> */}
-            {/* <h1 className="w-[110px] mx-auto mt-10 text-xl font-semibold capitalize ">line Chart</h1> */}
             <div className="w-[183px] h-[183px] mx-auto mt-4">
-              <div className=' pt-0 rounded-xl w-full h-full my-auto shadow-xl'>
-                <canvas id='myChart' width={200} height={200}></canvas>
+              <div className=" pt-0 rounded-xl w-full h-full my-auto shadow-xl">
+                <canvas id="myChart" width={200} height={200}></canvas>
               </div>
             </div>
           </div>
-
         </div>
         <div className="flex mb-[20px] px-[10px] gap-x-[20px]">
           <div
             className="w-[50%] rounded-[20px] p-[10px] border-[1px] rounded-lg"
-            onClick={() => router.push("/packaged")}>
+            onClick={() => router.push("/packaged")}
+          >
             <img
               className="mb-[10px] rounded-[20px]"
               src="assets/packet.png"
