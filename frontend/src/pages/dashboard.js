@@ -29,6 +29,7 @@ const HomePage = () => {
       }
     }
   }, []);
+
   useEffect(() => {
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -179,7 +180,7 @@ const HomePage = () => {
             </a>
           </div>
         </div>
-        <div className="p-[10px]">
+        <div className="p-[10px] w-full">
           <div className="flex py-[15px] rounded-[10px] border-[1px] justify-around">
             <div className="flex w-[33%] flex-col items-center">
               <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
@@ -196,12 +197,12 @@ const HomePage = () => {
               </div>
               <p className="font-bold text-gray-600">Alternate Food</p>
             </div>
-            <div className="flex w-[33%] flex-col items-center">
+            {/* <div className="flex w-[33%] flex-col items-center">
               <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
                 <img className="w-[40px]" src="assets/vegetables.png" />
               </div>
               <p className="font-bold text-gray-600">Recommend</p>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="p-[10px]">
