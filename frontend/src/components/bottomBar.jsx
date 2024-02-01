@@ -25,7 +25,10 @@ export const BottomBar = () => {
         </svg>
         Home
       </button>
-      <button className="flex items-center gap-x-[10px]">
+      <button
+        className="flex items-center gap-x-[10px]"
+        onClick={() => router.push("/community")}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
