@@ -177,10 +177,7 @@ const selectAllergens = () => {
         redirect: "follow",
       };
 
-      fetch(
-        "https://tsec-hack-all-stackers.vercel.app/addAllergies",
-        requestOptions
-      )
+      fetch("https://tsec-hacks.onrender.com/addAllergies", requestOptions)
         .then((response) => {
           console.log(response);
           router.push("/dashboard");

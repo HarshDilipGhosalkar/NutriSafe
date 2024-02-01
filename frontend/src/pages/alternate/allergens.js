@@ -24,7 +24,7 @@ const AllergenFood = () => {
     };
 
     fetch(
-      "https://tsec-hack-all-stackers.vercel.app/alternateAllergicFoods",
+      "https://tsec-hacks.onrender.com/alternateAllergicFoods",
       requestOptions
     )
       .then((response) => response.json())
