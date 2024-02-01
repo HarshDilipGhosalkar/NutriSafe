@@ -7,37 +7,37 @@ const ailes = [
   {
     id: 1,
     category: "dairy",
-    image: "/assets/breakfast.png",
+    image: "/assets/store_image/milk.jpeg",
     name: "Milk",
   },
   {
     id: 2,
     category: "dairy",
-    image: "/assets/breakfast.png",
+    image: "/assets/store_image/cheese.jpeg",
     name: "Cheese",
   },
   {
     id: 3,
     category: "bakery",
-    image: "/assets/breakfast.png",
+    image: "/assets/store_image/bread.jpg",
     name: "Bread",
   },
   {
     id: 4,
     category: "meat",
-    image: "/assets/breakfast.png",
+    image: "/assets/store_image/chicken.jpeg",
     name: "Chicken",
   },
   {
     id: 5,
     category: "produce",
-    image: "/assets/breakfast.png",
+    image: "/assets/store_image/apple.jpeg",
     name: "Apples",
   },
   {
     id: 6,
     category: "snacks",
-    image: "/assets/breakfast.png",
+    image: "/assets/store_image/chips.jpeg",
     name: "Chips",
   },
 ];
@@ -146,9 +146,11 @@ const StoreName = () => {
                   .map((aile, index) => (
                     <div
                       key={index}
-                      className="px-[10px] h-[200px] min-w-[200px] rounded-lg border-[1px] border-red-300 bg-red-100 px-[20px] p-[10px] mr-4"
+                      className="px-[10px] h-[200px] min-w-[200px] relative rounded-lg border-[1px] border-red-300 bg-red-100 px-[20px] p-[10px] mr-4"
                     >
-                      <img src={aile.image} />
+                       <img src={aile.image} alt="Aile Image" className="w-full h-auto" />
+                    <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
+    
                       <p className="mt-[10px] flex text-xl justify-center">
                         Aile: {aile.id}
                       </p>
