@@ -6,27 +6,28 @@ const AlertComponent = () => {
     const [showModal, setShowModal] = useState(false);
     const [newAlert, setNewAlert] = useState({ image: null, dishName: '', effect: '' });
 
-    // Function to handle API request for creating a report
-    const handleAddAlert = async ()  => {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-    
-        const formData = new FormData();
-        formData.append('mobile_number', "9137357003")
-        formData.append('image', newAlert.image);
-        formData.append('food_name', newAlert.dishName);
-        formData.append('effect', newAlert.effect);
+     // Function to handle API request for creating a report
+     const handleAddAlert = async () => {
+        var formdata = new FormData();
+        formdata.append("file", newAlert.image);
+        formdata.append("mobile_number", "9137357003");
+        formdata.append("food_name", newAlert.dishName);
+        formdata.append("effect", newAlert.effect);
 
-        try {
-            await axios.post('http://192.168.137.123:5000/report', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            alert('Image uploaded successfully!');
-            } catch (error) {
-            console.error('Error uploading image:', error);
-        }
+        var requestOptions = {
+            method: 'POST',
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        fetch("https://tsec-hacks.onrender.com/report", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                console.log(result)
+                setShowModal(false);
+                fetchReports()
+            })
+            .catch(error => console.log('error', error));
     };
 
     // Function to handle API request for fetching all reports
@@ -59,32 +60,30 @@ const AlertComponent = () => {
             setNewAlert({ ...newAlert, image: file });
         }
     };
-
     return (
-        <div className="flex flex-col items-center h-screen  overflow-y-scroll px-[40px]">
+        <div className="flex flex-col items-center w-[100%]  overflow-y-scroll py-6 px-10">
             {/* Displaying Reports */}
             {alerts.map((alert, index) => (
                 <div
                     key={index}
-                    className="w-full p-4 bg-light-red border-dark-red mb-8 bg-[#f8c2c2] rounded-md"
+                    className="w-[100%] h-[100%] p-4 mb-8 bg-light-red border-dark-red bg-[#f8c2c2] rounded-md overflow-hidden"
                 >
                     {/* Displaying image from blob */}
-                    {alert.food_image instanceof Blob && (
+                    {alert.food_image && (
                         <img
-                            src={URL.createObjectURL(alert.food_image)}
-                            alt={alert.allergies_detected}
-                            className="w-full h-60 object-cover mb-4 rounded-md"
+                            src={alert.food_image}
+                            className="w-[100%] h-[20%] object-cover mb-4 rounded-md"
                         />
                     )}
-                    <p className="text-[#9a2e2e] text-lg">{alert.allergies_detected}</p>
-                    <p className="text-[#9a2e2e] text-lg">{alert.food_name}</p>
+                    <p className="text-[#9a2e2e] text-lg font-bold mb-4">{alert.food_name}</p>
+                    <p className="text-[#9a2e2e] text-lg mb-4"> {alert.allergies_detected}</p>
+                    {/* Add any additional information or styling as needed */}
                 </div>
             ))}
 
-
             {/* Plus Button to Open Modal */}
             <div
-                className="fixed bottom-16 right-6 bg-blue-500 text-white px-4 py-3 rounded-[50%] cursor-pointer"
+                className="fixed bottom-16 right-6 bg-blue-500 text-white px-4 py-3 rounded-full cursor-pointer"
                 onClick={() => setShowModal(true)}
             >
                 <span className="font-bold text-2xl">+</span>
@@ -92,7 +91,7 @@ const AlertComponent = () => {
 
             {/* Modal */}
             {showModal && (
-                <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-opacity-90 bg-gray-800 px-[20px]">
+                <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-opacity-90 bg-gray-800 px-4">
                     <div className="bg-white p-8 rounded-md w-96 relative">
                         {/* Close Modal Button */}
                         <div className="flex justify-end absolute top-1 right-1">
