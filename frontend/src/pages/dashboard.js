@@ -22,6 +22,15 @@ const HomePage = () => {
     setTotalCalories(storedCalories);
   }, [totalCalories]);
 
+  // set dailyCalories variables in the local storage if not present
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (!localStorage.getItem("dailyCalories")) {
+        localStorage.setItem("dailyCalories", 0);
+      }
+    }
+  }, []);
+
   return (
     <>
       <div className="mt-[20px] flex flex-col justify-center items-center">
