@@ -55,8 +55,6 @@ const Items = () => {
         food_items_at_home: textInputs.join(", "),
       });
 
-      console.log(raw);
-
       const requestOptions = {
         method: "POST",
         headers: myHeaders,
@@ -65,7 +63,7 @@ const Items = () => {
       };
 
       const response = await fetch(
-        "https://tsec-hacks.onrender.com/recipe",
+        "https://tsec-hacks.onrender.com/recipeFromFoodItemsAtHome",
         requestOptions
       );
       const result = await response.json();

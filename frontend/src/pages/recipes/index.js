@@ -51,6 +51,21 @@ const Recipies = () => {
             </div>
             <img className="h-[100%] w-[175px]" src="assets/dinner.png"></img>
           </div>
+          <div
+            className="h-[100px] pl-[20px] flex items-center rounded-[20px] bg-green-100 overflow-hidden"
+            onClick={() => router.push("/recipes/items")}
+          >
+            <div className="py-[10px] pr-[10px]">
+              <p className="font-bold text-xl">Recipe from Food Item</p>
+              <p className="text-gray-600">
+                Get Recipe from food items you have at home.
+              </p>
+            </div>
+            <img
+              className="h-[100%] mr-[-35px]"
+              src="assets/food_item.png"
+            ></img>
+          </div>
         </div>
       </div>
     </div>
