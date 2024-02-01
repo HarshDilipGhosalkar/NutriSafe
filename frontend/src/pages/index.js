@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 const HomePage = () => {
   const value = 600;
   const router = useRouter();
-  const [totalCalories, setTotalCalories] = useState(0);
+  const [totalCalories, setTotalCalories] = useState(250);
 
   useEffect(() => {
     var storedCalories =
@@ -74,8 +74,8 @@ const HomePage = () => {
           <div className="w-[45%] h-[100%]  flex flex-col justify-center items-center">
             <div className="w-[70%] h-[50%]">
               <CircularProgressbar
-                value={(totalCalories / 1600) * 100}
-                text={totalCalories}
+                value={(910 / 1600) * 100}
+                text={910}
                 strokeWidth={8}
                 styles={buildStyles({
                   pathColor: "#ffa500",
