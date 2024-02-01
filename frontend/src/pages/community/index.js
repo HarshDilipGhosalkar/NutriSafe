@@ -8,7 +8,9 @@ const Community = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/message");
+        const response = await fetch(
+          "https://tsec-hacks.onrender.com:5000/message"
+        );
         const data = await response.json();
         setPosts(data.data); // Update the state with the fetched data
       } catch (error) {

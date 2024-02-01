@@ -24,11 +24,11 @@ const Home = () => {
 
   return (
     <div>
-      <div>
-        <label>
+      <div className="p-[10px]">
+        <label className="">
           Search for:
           <input
-            className="px-[10px] py-[5px] bg-blue-100"
+            className="ml-[10px] px-[10px] rounded-lg py-[5px] bg-blue-100"
             type="text"
             onKeyDown={handleInputChange}
           />
