@@ -1,36 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { useState } from 'react';
-
-
-
+import { useState } from "react";
 
 const Recipies = () => {
-  const [inputText, setInputText] = useState('');
-  const [isTextInput, setIsTextInput] = useState(false);
-  const [textInputs, setTextInputs] = useState([]);
-
-  const addTextInput = () => {
-    if (inputText.trim() !== '') {
-      setTextInputs([...textInputs, inputText]);
-      setInputText('');
-      setIsTextInput(false);
-    }
-  };
-
-  const toggleInputType = () => {
-    setIsTextInput(!isTextInput);
-    if (!isTextInput) {
-      setInputText('');
-    }
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      addTextInput();
-    }
-  };
-
   const router = useRouter();
   return (
     <div>
@@ -79,59 +51,22 @@ const Recipies = () => {
             </div>
             <img className="h-[100%] w-[175px]" src="assets/dinner.png"></img>
           </div>
-
-          <div className="h-[150px] pl-[20px] items-center rounded-[20px] bg-[#ffefcb] overflow-hidden">
-      {/* Part 1: Image and Text */}
-      <div className="flex items-center rounded-[20px] bg-[#ffefcb] h-[60px] w-[100%]">
-        <img className="h-[30%] mr-[-20px]" src="assets/sparkler.png" alt="Sparkler" />
-        <div className="py-[10px] ml-[30px]">
-          <p className="text-gray-600">
-            We'll configure a recipe from your ingredients
-          </p>
-        </div>
-      </div>
-
-      {/* Part 2: Add Ingredients */}
-      <div className="flex items-center rounded-[20px] bg-[#ffefcb] h-[30px] mb-2">
-        {textInputs.map((text, index) => (
-          <div key={index} style={{ marginBottom: '10px', display: 'flex' }}>
-            <div style={{ border: '1px solid #ccc', padding: '5px', marginRight: '10px', display: 'flex', alignItems: 'center', fontSize: '9px' }}>
-              {text}
-              <button onClick={() => removeTextInput(index)} style={{ fontSize: '9px' }}>✖</button>
+          <div
+            className="h-[100px] pl-[20px] flex items-center rounded-[20px] bg-green-100 overflow-hidden"
+            onClick={() => router.push("/recipes/items")}
+          >
+            <div className="py-[10px] pr-[10px]">
+              <p className="font-bold text-xl">Recipe from Food Item</p>
+              <p className="text-gray-600">
+                Get Recipe from food items you have at home.
+              </p>
             </div>
+            <img
+              className="h-[100%] mr-[-35px]"
+              src="assets/food_item.png"
+            ></img>
           </div>
-        ))}
-        <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
-          {isTextInput ? (
-            <input
-              type="text"
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              style={{ marginRight: '10px', width: '80px', fontSize: '9px', background: "#ffefcb" }}
-              placeholder="Add Ingredients"
-              onKeyPress={handleKeyPress}
-            />
-          ) : (
-            <button onClick={toggleInputType} style={{ fontSize: '9px' }}>Add Ingredients</button>
-          )}
         </div>
-      </div>
-
-      {/* Part 3: Generate Recipe Button */}
-      <div className="flex items-center">
-  <button className="h-[40px] px-4 rounded-[10px] bg-green-500 text-white" onClick={() => console.log("Generate Recipe Clicked")}>
-    <div className="flex items-center rounded-[20px] h-[60px] w-[100%]" style={{ alignItems: "center" }}>
-      <img className="h-[30%] mr-[-20px]" src="assets/sparkler.png" alt="Sparkler" />
-      <div className="py-[10px] ml-[30px] text-white">
-        <p className="text-white">
-          Generate Recipe
-        </p>
-      </div>
-    </div>
-  </button>
-</div>
-    </div>
-          </div>
       </div>
     </div>
   );

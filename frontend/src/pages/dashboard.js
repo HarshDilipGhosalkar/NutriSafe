@@ -70,7 +70,7 @@ const HomePage = () => {
               />
 
             </div>
-            <button class="bg-[#ffa500] mt-7   h-8 text-white rounded-[25px] px-3 font-bold transition duration-300 hover:bg-blue-600"
+            <button class="bg-blue-400 mt-7   h-8 text-white rounded-[25px] px-3 font-bold transition duration-300 hover:bg-blue-600"
               onClick={() => router.push("/calory")}>
               Add Calori
             </button>
