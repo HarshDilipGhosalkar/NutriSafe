@@ -28,7 +28,7 @@ const Lunch = () => {
         };
 
         const response = await fetch(
-          "http://localhost:5000/recipe",
+          "https://tsec-hacks.onrender.com/recipe",
           requestOptions
         );
         const result = await response.json();

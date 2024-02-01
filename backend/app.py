@@ -8,8 +8,6 @@ from resources.scanner import (PackagedFood, Food)
 from resources.recipe import (Recipe, RecipeFromFoodItemsAtHome)
 from resources.message import Message
 from resources.report import Report
-from resources.ImageToItems import ImageToItems
-from resources.Calories import Calories
 # from backend.resources.alternateFoodsOld import (AlternateAllergicFoods, AlternateNonAllergicFoods)
 from resources.alternateFoods import (AlternateAllergicFoods, AlternateNonAllergicFoods)
 from mongo_engine import db
@@ -19,7 +17,6 @@ import os
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
-
 
 DB_URI = os.getenv("FLASK_MONGODB_URI")
 
@@ -36,6 +33,8 @@ api.add_resource(Recipe, "/recipe")
 api.add_resource(RecipeFromFoodItemsAtHome, '/recipeFromFoodItemsAtHome')
 api.add_resource(Message, "/message")
 api.add_resource(Report, "/report")
+api.add_resource(AlternateAllergicFoods, "/alternateAllergicFoods")
+api.add_resource(AlternateNonAllergicFoods, "/alternateNonAllergicFoods")
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

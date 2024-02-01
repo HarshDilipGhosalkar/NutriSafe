@@ -28,7 +28,7 @@ const Dinner = () => {
         };
 
         const response = await fetch(
-          "http://localhost:5000/recipe",
+          "https://tsec-hacks.onrender.com/recipe",
           requestOptions
         );
         const result = await response.json();
@@ -69,16 +69,6 @@ const Dinner = () => {
               Instructions
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="details" className="mt-[10px] py-[10px]">
-            <p className="px-[10px]">
-              Spaghetti Carbonara, a classic Italian dish, features al dente
-              pasta tossed in a creamy sauce of eggs, Pecorino Romano cheese,
-              pancetta, and black pepper. The savory pancetta adds depth, while
-              the cheese and eggs create a velvety coating. It's a comforting
-              and flavorful masterpiece, beloved for its simplicity and rich
-              flavors.
-            </p>
-          </TabsContent>
           <TabsContent
             value="details"
             className="mt-[10px] py-[10px] px-[15px]"
@@ -100,6 +90,15 @@ const Dinner = () => {
                   Protein: {details.details.nutrients.protein}
                 </p>
               </div>
+            </div>
+          </TabsContent>
+          <TabsContent value="incredient">
+            <div className="p-[15px]">
+              {ingredients.map((items) => (
+                <div className="rounded-lg py-[10px] px-[20px] mb-[10px] border-gray-300 border-[1px]">
+                  <p>{items}</p>
+                </div>
+              ))}
             </div>
           </TabsContent>
 
