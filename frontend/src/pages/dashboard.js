@@ -1,8 +1,8 @@
 // import React from "react";
 import { useState, React, useEffect } from "react";
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css'; // Import default styles
-import 'tailwindcss/tailwind.css'; // Import Tailwind CSS styles
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css"; // Import default styles
+import "tailwindcss/tailwind.css"; // Import Tailwind CSS styles
 import { useRouter } from "next/router";
 
 const HomePage = () => {
@@ -10,15 +10,16 @@ const HomePage = () => {
   const router = useRouter();
   const [totalCalories, setTotalCalories] = useState(0);
 
-
   useEffect(() => {
-    var storedCalories = typeof window !== 'undefined' ? localStorage.getItem('dailyCalories') : null;
+    var storedCalories =
+      typeof window !== "undefined"
+        ? localStorage.getItem("dailyCalories")
+        : null;
 
     // const storedCalories = localStorage.getItem('dailyCalories');
     // storedCalories=parseInt(storedCalories)+parseInt(totalCalories);
     // const calory=localStorage.getItem('dailyCalories');
     setTotalCalories(storedCalories);
-
   }, [totalCalories]);
 
   return (
@@ -27,34 +28,34 @@ const HomePage = () => {
         <div className="rounded-[10px] w-[95%] h-[190px] bg-white mb-4 flex justify-evenly items-center border bottom-1 ">
           <div className="w-[45%] h-[100%]  flex flex-col justify-center items-center">
             <div className="w-[70%] h-[50%]">
-
               <CircularProgressbar
                 value={(totalCalories / 1600) * 100}
                 text={totalCalories}
                 strokeWidth={8}
                 styles={buildStyles({
-                  pathColor: '#3b81f4',
-                  textColor: '#3b81f4',
-                  trailColor: '#9fc2fd',
-                  textSize: '1.5rem', // Set your desired text size
-                  fontWeight: 'bold',
-                  pathTransitionDuration: 0.6 // Set your desired color for the trail
+                  pathColor: "#3b81f4",
+                  textColor: "#3b81f4",
+                  trailColor: "#9fc2fd",
+                  textSize: "1.5rem", // Set your desired text size
+                  fontWeight: "bold",
+                  pathTransitionDuration: 0.6, // Set your desired color for the trail
                 })}
               />
-
             </div>
-            <button class="bg-blue-400 mt-7   h-8 text-white rounded-[25px] px-3 font-bold transition duration-300 hover:bg-blue-600"
-            onClick={()=>router.push("/calory")}>
+            <button
+              class="bg-blue-400 mt-7   h-8 text-white rounded-[25px] px-3 font-bold transition duration-300 hover:bg-blue-600"
+              onClick={() => router.push("/calory")}
+            >
               Add Calori
             </button>
           </div>
           <div className="w-[45%] h-[90%] bg-slate-50"></div>
-
         </div>
         <div className="flex mb-[20px] px-[10px] gap-x-[20px]">
           <div
             className="w-[50%] rounded-[20px] p-[10px] border-[1px] rounded-lg"
-            onClick={() => router.push("/packaged")}>
+            onClick={() => router.push("/packaged")}
+          >
             <img
               className="mb-[10px] rounded-[20px]"
               src="assets/packet.png"
@@ -89,35 +90,34 @@ const HomePage = () => {
               }}
               className="bold text-blue-500 font-bold"
             >
-              Get Recipes &rarr;{" "}
+              Get Recipes &rarr;
             </a>
           </div>
         </div>
-        <div className="p-[10px]">
-          <div className="flex py-[15px] rounded-[10px] border-[1px] justify-around">
-            <div className="flex w-[33%] flex-col items-center" 
-              onClick={() => router.push('/report')}
-            >
-              <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
-                <img className="w-[40px]" src="assets/warning.png" />
-              </div>
-              <p className="font-bold text-gray-600">Report</p>
+        <div className="flex py-[15px] w-[100%] justify-around">
+          <div
+            className="flex w-[33%] flex-col items-center"
+            onClick={() => router.push("/report")}
+          >
+            <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
+              <img className="w-[40px]" src="assets/warning.png" />
             </div>
-            <div
-              className="flex w-[33%] flex-col items-center"
-              onClick={() => router.push("/alternate")}
-            >
-              <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
-                <img className="w-[40px]" src="assets/rice.png" />
-              </div>
-              <p className="font-bold text-gray-600">Alternate Food</p>
+            <p className="font-bold text-gray-600">Report</p>
+          </div>
+          <div
+            className="flex w-[33%] flex-col items-center"
+            onClick={() => router.push("/alternate")}
+          >
+            <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
+              <img className="w-[40px]" src="assets/rice.png" />
             </div>
-            <div className="flex w-[33%] flex-col items-center">
-              <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
-                <img className="w-[40px]" src="assets/vegetables.png" />
-              </div>
-              <p className="font-bold text-gray-600">Recommend</p>
+            <p className="font-bold text-gray-600">Alternate Food</p>
+          </div>
+          <div className="flex w-[33%] flex-col items-center">
+            <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
+              <img className="w-[40px]" src="assets/vegetables.png" />
             </div>
+            <p className="font-bold text-gray-600">Recommend</p>
           </div>
         </div>
         <div className="p-[10px]">
