@@ -163,11 +163,23 @@ const selectAllergens = () => {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
+      
+      let allergenNames = []
+      selectedAllergens.forEach((allergens) => {
+        allergenNames.push(allergens.name);
+      });
+
+      let foodItems = []
+      selectedFoodItems.forEach((foodItem) => {
+        foodItems.push(foodItem.name);
+      });
+
+      
       var raw = JSON.stringify({
         mobile_number: "9137357003",
-        allergens: selectedAllergens,
-        allergy_foods: selectedFoodItems,
-        food_preferences: selectedFoodCategory,
+        allergens: allergenNames,
+        allergy_foods: foodItems,
+        food_preferences: selectedFoodCategory.name,
       });
 
       var requestOptions = {

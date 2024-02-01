@@ -94,6 +94,7 @@ class PackagedFood(Resource):
         reports = reports.to_json()
 
         response = generate_gemini_response(packaged_food_input_prompt, image_content, packaged_food_question_prompt.format(allergens=allergens, allergy_foods=allergy_foods, food_preferences=food_preferences, previous_reports=reports))
+        print(response)
 
         return {"error": False, "data": json.loads(response)}
 
