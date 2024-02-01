@@ -2,10 +2,12 @@ import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState, useEffect } from "react";
 import InstructionCard from "@/components/InstructionCard";
+import { ScaleLoader } from "react-spinners";
 
 const Breakfast = () => {
   const [ingredients, setIngredients] = useState([]);
   const [instruction, setInstruction] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [details, setDetails] = useState({
     name: "",
     details: { nutrients: {} },
@@ -45,6 +47,9 @@ const Breakfast = () => {
       } catch (error) {
         console.error("Error fetching recipe data:", error);
       }
+      finally {
+        setIsLoading(false);
+      }
     };
 
     fetchData();
@@ -70,47 +75,53 @@ const Breakfast = () => {
               Instructions
             </TabsTrigger>
           </TabsList>
-          <TabsContent
-            value="details"
-            className="mt-[10px] py-[10px] px-[15px]"
-          >
-            <div className="px-[10px] rounded-lg border-[1px] border-red-300 bg-red-100 px-[20px] p-[10px]">
-              <h1 className="text-2xl mb-[20px]">{details.name}</h1>
-              <h1 className="text-xl font-bold">Nutrients:</h1>
-              <div className="text-xl">
-                <p className="text-red-700">
-                  Calories: {details.details.nutrients.calories}
-                </p>
-                <p className="text-green-700">
-                  Carbohydrates: {details.details.nutrients.carbohydrates}
-                </p>
-                <p className="text-yellow-600">
-                  Fat: {details.details.nutrients.fat}
-                </p>
-                <p className="text-blue-700">
-                  Protein: {details.details.nutrients.protein}
-                </p>
-              </div>
-            </div>
-          </TabsContent>
-          <TabsContent value="incredient">
-            <div className="p-[15px]">
-              {ingredients.map((items) => (
-                <div className="rounded-lg py-[10px] px-[20px] mb-[10px] border-gray-300 border-[1px]">
-                  <p>{items}</p>
+          {!isLoading ? <>
+            <TabsContent
+              value="details"
+              className="mt-[10px] py-[10px] px-[15px]"
+            >
+              <div className="px-[10px] rounded-lg border-[1px] border-red-300 bg-red-100 px-[20px] p-[10px]">
+                <h1 className="text-2xl mb-[20px]">{details.name}</h1>
+                <h1 className="text-xl font-bold">Nutrients:</h1>
+                <div className="text-xl">
+                  <p className="text-red-700">
+                    Calories: {details.details.nutrients.calories}
+                  </p>
+                  <p className="text-green-700">
+                    Carbohydrates: {details.details.nutrients.carbohydrates}
+                  </p>
+                  <p className="text-yellow-600">
+                    Fat: {details.details.nutrients.fat}
+                  </p>
+                  <p className="text-blue-700">
+                    Protein: {details.details.nutrients.protein}
+                  </p>
                 </div>
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="instruction">
-            <div className="p-[15px]">
-              <div className="flex flex-col">
-                <h2 className="text-2xl font-bold mb-4">Instructions</h2>
-                <InstructionCard instructions={instruction} />
               </div>
+            </TabsContent>
+            <TabsContent value="incredient">
+              <div className="p-[15px]">
+                {ingredients.map((items) => (
+                  <div className="rounded-lg py-[10px] px-[20px] mb-[10px] border-gray-300 border-[1px]">
+                    <p>{items}</p>
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="instruction">
+              <div className="p-[15px]">
+                <div className="flex flex-col">
+                  <h2 className="text-2xl font-bold mb-4">Instructions</h2>
+                  <InstructionCard instructions={instruction} />
+                </div>
+              </div>
+            </TabsContent>
+            </>
+          :
+            <div className="mt-[200px] w-full flex justify-center">
+              <ScaleLoader color="#da7bae" />
             </div>
-          </TabsContent>
+        }
         </Tabs>
       </div>
     </div>

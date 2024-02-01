@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const AlertComponent = () => {
     const [alerts, setAlerts] = useState([]);
@@ -6,33 +7,27 @@ const AlertComponent = () => {
     const [newAlert, setNewAlert] = useState({ image: null, dishName: '', effect: '' });
 
     // Function to handle API request for creating a report
-    const handleAddAlert = () => {
+    const handleAddAlert = async ()  => {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
+    
+        const formData = new FormData();
+        formData.append('mobile_number', "9137357003")
+        formData.append('image', newAlert.image);
+        formData.append('food_name', newAlert.dishName);
+        formData.append('effect', newAlert.effect);
+        con
 
-        var raw = JSON.stringify({
-            "mobile_number": "9137357003",
-            "food_image": newAlert.image,
-            "food_name": newAlert.dishName,
-            "allergies_detected": newAlert.effect
-        });
-
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
-        fetch("https://tsec-hacks.onrender.com/report", requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                console.log(result);
-                // After successful submission, you might want to refresh the reports
-                fetchReports();
-                showModal();
-              })
-            .catch(error => console.log('error', error));
+        try {
+            await axios.post('http://192.168.137.123:5000/report', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            alert('Image uploaded successfully!');
+            } catch (error) {
+            console.error('Error uploading image:', error);
+        }
     };
 
     // Function to handle API request for fetching all reports
