@@ -16,7 +16,6 @@ const AlertComponent = () => {
         formData.append('image', newAlert.image);
         formData.append('food_name', newAlert.dishName);
         formData.append('effect', newAlert.effect);
-        con
 
         try {
             await axios.post('http://192.168.137.123:5000/report', formData, {
