@@ -141,23 +141,25 @@ const StoreName = () => {
 
             <TabsContent value="avoid">
               <div className="py-[10px] pb-[20px] overflow-x-auto flex">
-                {ailes.splice(0,4).map((aile, index) => (
-                  <div
-                    key={index}
-                    className="px-[10px] h-[200px] min-w-[200px] rounded-lg border-[1px] border-red-300 bg-red-100 px-[20px] p-[10px] mr-4"
-                  >
-                    <img src={aile.image} />
-                    <p className="mt-[10px] flex text-xl justify-center">
-                      Aile: {aile.id}
-                    </p>
-                    <div className="px-[5px] flex items-center justify-between">
-                      <p className="font-bold text-xl flex justify-center">
-                        {aile.name}
+                {ailes
+                  .filter((item) => item.category == "dairy")
+                  .map((aile, index) => (
+                    <div
+                      key={index}
+                      className="px-[10px] h-[200px] min-w-[200px] rounded-lg border-[1px] border-red-300 bg-red-100 px-[20px] p-[10px] mr-4"
+                    >
+                      <img src={aile.image} />
+                      <p className="mt-[10px] flex text-xl justify-center">
+                        Aile: {aile.id}
                       </p>
-                      <em>{aile.category}</em>
+                      <div className="px-[5px] flex items-center justify-between">
+                        <p className="font-bold text-xl flex justify-center">
+                          {aile.name}
+                        </p>
+                        <em>{aile.category}</em>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </TabsContent>
           </Tabs>
