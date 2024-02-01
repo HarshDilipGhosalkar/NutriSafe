@@ -1,18 +1,60 @@
-import React from "react";
-// import CircularProgressBar from "../components/CircularProgressBar";
+// import React from "react";
+import { useState, React, useEffect } from "react";
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css'; // Import default styles
+import 'tailwindcss/tailwind.css'; // Import Tailwind CSS styles
 import { useRouter } from "next/router";
 
 const HomePage = () => {
   const value = 600;
   const router = useRouter();
+  const [totalCalories, setTotalCalories] = useState(0);
+
+
+  useEffect(() => {
+    var storedCalories = typeof window !== 'undefined' ? localStorage.getItem('dailyCalories') : null;
+
+    // const storedCalories = localStorage.getItem('dailyCalories');
+    // storedCalories=parseInt(storedCalories)+parseInt(totalCalories);
+    // const calory=localStorage.getItem('dailyCalories');
+    setTotalCalories(storedCalories);
+
+  }, [totalCalories]);
 
   return (
     <>
-      <div className="mt-[20px] flex flex-col">
+      <div className="mt-[20px] flex flex-col justify-center items-center">
+        <div className="rounded-[10px] w-[95%] h-[190px] bg-white mb-4 flex justify-evenly items-center border bottom-1 ">
+          <div className="w-[45%] h-[100%]  flex flex-col justify-center items-center">
+            <div className="w-[70%] h-[50%]">
+
+              <CircularProgressbar
+                value={(totalCalories / 1600) * 100}
+                text={totalCalories}
+                strokeWidth={8}
+                styles={buildStyles({
+                  pathColor: '#3b81f4',
+                  textColor: '#3b81f4',
+                  trailColor: '#9fc2fd',
+                  textSize: '1.5rem', // Set your desired text size
+                  fontWeight: 'bold',
+                  pathTransitionDuration: 0.6 // Set your desired color for the trail
+                })}
+              />
+
+            </div>
+            <button class="bg-blue-400 mt-7   h-8 text-white rounded-[25px] px-3 font-bold transition duration-300 hover:bg-blue-600"
+            onClick={()=>router.push("/calory")}>
+              Add Calori
+            </button>
+          </div>
+          <div className="w-[45%] h-[90%] bg-slate-50"></div>
+
+        </div>
         <div className="flex mb-[20px] px-[10px] gap-x-[20px]">
-          <div 
-          className="w-[50%] rounded-[20px] p-[10px] border-[1px] rounded-lg"
-          onClick={() => router.push("/packaged")}>
+          <div
+            className="w-[50%] rounded-[20px] p-[10px] border-[1px] rounded-lg"
+            onClick={() => router.push("/packaged")}>
             <img
               className="mb-[10px] rounded-[20px]"
               src="assets/packet.png"
