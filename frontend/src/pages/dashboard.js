@@ -182,7 +182,9 @@ const HomePage = () => {
         </div>
         <div className="p-[10px] w-full">
           <div className="flex py-[15px] rounded-[10px] border-[1px] justify-around">
-            <div className="flex w-[33%] flex-col items-center">
+            <div className="flex w-[33%] flex-col items-center"
+            
+            >
               <div className="w-[60px] h-[60px] flex justify-center items-center rounded-full border-[1px] border-gray-300">
                 <img className="w-[40px]" src="assets/warning.png" />
               </div>
