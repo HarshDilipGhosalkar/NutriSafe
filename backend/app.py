@@ -38,7 +38,7 @@ api.add_resource(Report, "/report")
 api.add_resource(AlternateAllergicFoods, "/alternateAllergicFoods")
 api.add_resource(AlternateNonAllergicFoods, "/alternateNonAllergicFoods")
 api.add_resource(Calories, "/calculateCalories")
-api.add_resource(ImageToItems, "/imageToItems")
+api.add_resource(ImageToItems, "/predictDisease")
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
