@@ -24,22 +24,26 @@ balance_dosh_index= load_index_from_storage(storage_context)
 
 memory = ChatMemoryBuffer.from_defaults(token_limit=1500)
 
-predictDiseaseChatEngine = balance_dosh_index.as_chat_engine(
+remediesChatEngine = balance_dosh_index.as_chat_engine(
     chat_mode="context",
     memory=memory,
     system_prompt= prompt1,
 )
 
-class PredictDisease(Resource):
+class remedies(Resource):
     
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument("symptoms", type=str, required=True, help="symptoms is required")
+        parser.add_argument("cropName", type=str, required=True, help="cropName is required")
+        parser.add_argument("disease_name", type=str, required=True, help="disease_name is required")
         args = parser.parse_args()
         symptoms = args["symptoms"]
-
+        cropName =args["cropName"]
+        disease_name=args["disease_name"]
+        promt=f"cropName={cropName},disease_name={disease_name},symptoms={symptoms} give treatment and fertilizers"
         try:
-            response = predictDiseaseChatEngine.chat(symptoms)
+            response = remediesChatEngine.chat(promt)
             print(response)
             json_response = json.loads(response.response)
             print(json_response)
