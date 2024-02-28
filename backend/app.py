@@ -8,7 +8,7 @@ from resources.scanner import (PackagedFood, Food)
 from resources.recipe import (Recipe, RecipeFromFoodItemsAtHome)
 from resources.message import Message
 from resources.report import Report
-from resources.remedies import remedies
+# from resources.remedies import remedies
 # from backend.resources.alternateFoodsOld import (AlternateAllergicFoods, AlternateNonAllergicFoods)
 from resources.alternateFoods import (AlternateAllergicFoods, AlternateNonAllergicFoods)
 from resources.Calories import Calories
@@ -39,8 +39,8 @@ api.add_resource(Report, "/report")
 api.add_resource(AlternateAllergicFoods, "/alternateAllergicFoods")
 api.add_resource(AlternateNonAllergicFoods, "/alternateNonAllergicFoods")
 api.add_resource(Calories, "/calculateCalories")
-api.add_resource(ImageToItems, "/predictDisease")
-api.add_resource(remedies, "/remedies")
+api.add_resource(ImageToItems, "/imageToItems")
+# api.add_resource(remedies, "/remedies")
 
 
 if __name__ == "__main__":

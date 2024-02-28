@@ -44,8 +44,9 @@ prompt = """
 """
 
 prompt2 = """
-    Act as an expert of nutirition and allergies. I will give you a food type like breakfast, lunch, dinner, etc. 
-    You should tell me a recipe for that food type keeping in mind the user's allergies, food preferences and the major food items I have at home. 
+    Act as an expert of nutirition and allergies. 
+    You should tell me a recipe for that food type keeping in mind the user's allergies, food preferences and the major food items I have at home.
+    Strictly generate recipe from the provided food items only, don't consider any other food items for generating recipe
     You will receive the user's allergies and food preferences in the below format:
     users_allergies: {{
         allergens: {allergens},
@@ -116,7 +117,7 @@ class RecipeFromFoodItemsAtHome(Resource):
         allergy_foods = user["allergy_foods"]
         food_preferences = user["food_preferences"]
 
-        response = llm.invoke(prompt.format(allergens=allergens, allergy_foods=allergy_foods, food_preferences=food_preferences, time=args["time"], food_items_at_home=args["food_items_at_home"]))
+        response = llm.invoke(prompt2.format(allergens=allergens, allergy_foods=allergy_foods, food_preferences=food_preferences, time=args["time"], food_items_at_home=args["food_items_at_home"]))
         print(response.content)
 
         return {"error": False, "data": json.loads(response.content)}, 200

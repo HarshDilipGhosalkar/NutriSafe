@@ -56,25 +56,16 @@ def generate_gemini_response(input_prompt, image, question_prompt):
     return response.text
 
 input_prompt = """
-You will receive input images of any plant or crop and you have to predict the plant/crop name and also whether the plant is healthy or not if plant/crop is not healthy then also provide disease name and if the plant is healthy then return empty crop_disease field.Strictly,note don't give general disease name give the exact name of the disease the crop has. 
-               
+               You are an Nutirtional expert who understands calories in food.
+               You will receive input images of food items and you have to predict the calories in the food item.             
 """
 
-question_prompt = """You will receive input images of any plant or crop and you have to predict the plant/crop name and also whether the plant is healthy or not if plant/crop is not healthy then also provide disease name and if the plant is healthy then return empty crop_disease field and aslo give a small description of the image like which crop/plant is present and describe that image in few words like is the crop/plant is having certain disease the write about it if not then dont.Note don't give general disease name give the exact name of the disease the crop has. Strictly no other words, introduction and outro are allowed.Also plant description should not be more than 3 4 lines
-    for example if crop/plant is healthy: 
-        
-            {"cropName": "banana", "health_status": "yes","disease_name":"" ,plant_description:""}
-            
-        example if plant/crop is not healthy: 
-        
-            {"cropName": "banana", "health_status": "no","disease_name":"Earaly blight",plant_description:"A banana plant with black spots on it"},
-
-         
-           
-        
-        The above format is just for example return the response in above format .
-    Strictly no \n or \ or any other special characters are allowed. don't format your response in any way.
-"""
+question_prompt = """You will receive a photo of food items. List down 5-10 food items with thier calories and calories from the photo given to you. It should be strictly a descrete number and not range. Strictly no other words, introduction and outro are allowed. Response should be an array of food items.
+    for example: 
+        [
+            {"foodName": "apple", "calories": 200}, 
+            {"foodName":"banana","calories": 400}
+        ]"""
 
 class ImageToItems(Resource):
     def post(self):
