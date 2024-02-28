@@ -30,7 +30,7 @@ const Dinner = () => {
         };
 
         const response = await fetch(
-          "https://tsec-hacks.onrender.com/recipe",
+          "https://tsec-hack-allstackers.onrender.com/recipe",
           requestOptions
         );
         const result = await response.json();

@@ -24,7 +24,7 @@ const handleUpload = () => {
     formData.append('image', selectedImage);
     setLoading(true);
 
-    fetch('https://tsec-hacks.onrender.com/packagedFood', {
+    fetch('https://tsec-hack-allstackers.onrender.com/packagedFood', {
       method: 'POST',
       body: formData,
       mode: 'cors',

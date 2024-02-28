@@ -26,7 +26,7 @@ const MyComponent = () => {
             formData.append('image', selectedImage);
             setLoading(true);
 
-            fetch('https://tsec-hacks.onrender.com/food', {
+            fetch('https://tsec-hack-allstackers.onrender.com/food', {
                 method: 'POST',
                 body: formData,
                 mode: 'cors',

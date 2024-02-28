@@ -24,7 +24,7 @@ const AllergenFood = () => {
     };
 
     fetch(
-      "https://tsec-hacks.onrender.com/alternateAllergicFoods",
+      "http://localhost:5000/alternateAllergicFoods",
       requestOptions
     )
       .then((response) => response.json())

@@ -189,7 +189,7 @@ const selectAllergens = () => {
         redirect: "follow",
       };
 
-      fetch("https://tsec-hacks.onrender.com/addAllergies", requestOptions)
+      fetch("https://tsec-hack-allstackers.onrender.com/addAllergies", requestOptions)
         .then((response) => {
           console.log(response);
           router.push("/dashboard");

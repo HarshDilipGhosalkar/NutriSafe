@@ -63,7 +63,7 @@ const Items = () => {
       };
 
       const response = await fetch(
-        "https://tsec-hacks.onrender.com/recipeFromFoodItemsAtHome",
+        "https://tsec-hack-allstackers.onrender.com/recipeFromFoodItemsAtHome",
         requestOptions
       );
       const result = await response.json();

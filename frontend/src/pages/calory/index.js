@@ -1,5 +1,5 @@
 import { toInteger, toNumber } from 'lodash';
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScaleLoader } from 'react-spinners';
 const axios = require('axios');
 
@@ -13,51 +13,53 @@ const MyComponent = () => {
   const [loading, setLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
-const handleImageChange = (event) => {
-  const file = event.target.files[0];
-  setSelectedImage(file);
-};
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(file);
+  };
 
-const handleUpload = () => {
-  if (selectedImage) {
-    const formData = new FormData();
-    formData.append('image', selectedImage);
-    setLoading(true);
+  const handleUpload = () => {
+    if (selectedImage) {
+      const formData = new FormData();
+      formData.append('image', selectedImage);
+      setLoading(true);
 
-    // Remove or update the Content-Type header
-    fetch('https://tsec-hacks.onrender.com/imageToItems', {
-      method: 'POST',
-      body: formData,
-      mode: 'cors',
-      headers: {
-      }
-    })
-      .then(response => response.json())
-      .then(result => {
-        console.log(result)
-        const newItems = result.data
-        const total = newItems.reduce((acc, item) => {
-          return acc + toInteger(item.calories)
-        }, 0)
-        // append this array to itemlist array
-        setItemList([...itemList, ...newItems]);
-        setTotalCalories(totalCalories+total)
+      // Remove or update the Content-Type header
+      fetch('https://tsec-hack-allstackers.onrender.com/imageToItems', {
+        method: 'POST',
+        body: formData,
+        mode: 'cors',
+        headers: {
+        }
       })
-      .finally(() => {
-        setLoading(false);
-      })
+        .then(response => response.json())
+        .then(result => {
+          console.log(result)
+          const newItems = result.data
+          const total = newItems.reduce((acc, item) => {
+            return acc + toInteger(item.calories)
+          }, 0)
+          // append this array to itemlist array
+          setItemList([...itemList, ...newItems]);
+          setTotalCalories(totalCalories + total)
+        })
+        .finally(() => {
+          setLoading(false);
+        })
 
-      .catch(error => console.log('error', error));
-  } else {
-    console.warn('No image selected');
-  }
-};
+        .catch(error => console.log('error', error));
+    } else {
+      console.warn('No image selected');
+    }
+  };
 
 
 
 
   const handleInputChange = (e) => {
+
     setInputValue(e.target.value);
+
   };
 
   //   const handleImageUpload = (e) => {
@@ -80,7 +82,7 @@ const handleUpload = () => {
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://tsec-hacks.onrender.com/calculateCalories',
+        url: 'https://tsec-hack-allstackers.onrender.com/calculateCalories',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -104,6 +106,13 @@ const handleUpload = () => {
           // Update total calories
           setTotalCalories((prevTotal) => prevTotal + newItem.calories);
 
+
+          var storedCalories = typeof window !== 'undefined' ? localStorage.getItem('dailyCalories') : null;
+
+          // const storedCalories = localStorage.getItem('dailyCalories');
+          storedCalories = parseInt(storedCalories) + newItem.calories;
+          localStorage.setItem('dailyCalories', storedCalories);
+
           setInputValue('');
 
         })
@@ -118,19 +127,27 @@ const handleUpload = () => {
 
   const handleDeleteItem = (index) => {
     const deletedItem = itemList[index];
+    console.log("deleted", deletedItem)
+
     setTotalCalories((prevTotal) => prevTotal - deletedItem.calories);
+    localStorage.setItem('dailyCalories', totalCalories);
+    console.log("prevTotal", totalCalories)
     setItemList(itemList.filter((item, i) => i !== index));
+
+
+
+
   };
   console.log(itemList)
 
-  useEffect(() => {
-    var storedCalories = typeof window !== 'undefined' ? localStorage.getItem('dailyCalories') : null;
+  // useEffect(() => {
+  //   var storedCalories = typeof window !== 'undefined' ? localStorage.getItem('dailyCalories') : null;
 
-    // const storedCalories = localStorage.getItem('dailyCalories');
-    storedCalories=parseInt(storedCalories)+parseInt(totalCalories);
-    localStorage.setItem('dailyCalories',storedCalories);
+  //   // const storedCalories = localStorage.getItem('dailyCalories');
+  //   storedCalories=parseInt(storedCalories)+parseInt(totalCalories);
+  //   localStorage.setItem('dailyCalories',storedCalories);
 
-  }, [totalCalories]);
+  // }, [totalCalories]);
 
   return (
     <div className="flex flex-col items-center justify-center h-full">
@@ -152,13 +169,13 @@ const handleUpload = () => {
         </div>
 
 
-      
+
         <div className='w-[80%] h-[80%] pt-[10px]'>
           <div className="flex flex-row w-[100%] mx-auto gap-x-16 justify-center h-[100%]">
             <div className="flex flex-col items-center">
 
               {selectedImage ?
-                <img src={URL.createObjectURL(selectedImage)} alt="image" className="w-[300px] h-[300px]"/>
+                <img src={URL.createObjectURL(selectedImage)} alt="image" className="w-[300px] h-[300px]" />
                 :
                 <div className="p-8 border-[3px] border-dotted border-gray-300 rounded-lg bg-gray-100 text-center flex flex-col justify-center items-center ">
                   <h2 className="text-xl font-semibold ">Image Upload</h2>
@@ -214,7 +231,7 @@ const handleUpload = () => {
               className="flex justify-between items-center mb-4 border-b border-gray-300 hover:hover:border-b-4 hover:border-blue-500 w-[100%]"
             >
               <div className='flex flex-row gap-x-[15px] text-[18px]'>
-                <div>{index+1}. </div>
+                <div>{index + 1}. </div>
                 {item.foodName} - <p>{item.calories}</p> Calories
               </div>
               <button
