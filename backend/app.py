@@ -40,7 +40,6 @@ api.add_resource(AlternateAllergicFoods, "/alternateAllergicFoods")
 api.add_resource(AlternateNonAllergicFoods, "/alternateNonAllergicFoods")
 api.add_resource(Calories, "/calculateCalories")
 api.add_resource(ImageToItems, "/imageToItems")
-# api.add_resource(remedies, "/remedies")
 
 @app.route('/ping', methods=['GET'])
 def ping():
