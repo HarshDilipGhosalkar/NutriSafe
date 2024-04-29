@@ -9,7 +9,7 @@ const Community = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/message"
+          "https://tsec-hack-allstackers.onrender.com/message"
         );
         const data = await response.json();
         setPosts(data.data); // Update the state with the fetched data

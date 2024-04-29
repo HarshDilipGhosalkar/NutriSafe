@@ -23,7 +23,7 @@ const Create = () => {
     };
 
     // Send the POST request to the API endpoint
-    fetch("http://localhost:5000/message", requestOptions)
+    fetch("https://tsec-hack-allstackers.onrender.com/message", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error))

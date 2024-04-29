@@ -188,7 +188,6 @@ const selectAllergens = () => {
         body: raw,
         redirect: "follow",
       };
-
       fetch("https://tsec-hack-allstackers.onrender.com/addAllergies", requestOptions)
         .then((response) => {
           console.log(response);

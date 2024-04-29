@@ -20,7 +20,7 @@ const AlertComponent = () => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/report", requestOptions)
+        fetch("https://tsec-hack-allstackers.onrender.com/report", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result)
