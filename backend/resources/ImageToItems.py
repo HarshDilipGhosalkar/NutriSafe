@@ -6,7 +6,7 @@ import json
 from io import BytesIO
 
 
-genai.configure(api_key = 'AIzaSyCZ3hM3g0uvHPhgvzjpK1xBJ1_gk6I8sY0')
+genai.configure(api_key = 'AIzaSyAICt3N6_7M5k1rabLvPESlCixWHyzsq6o')
 
 generation_config = {
   "temperature": 0.4,
