@@ -57,7 +57,7 @@ const Food = () => {
     };
 
     fetch(
-      "https://tsec-hack-allstackers.onrender.com/alternateNonAllergicFoods",
+      "https://nutrisafe.onrender.com/alternateNonAllergicFoods",
       requestOptions
     )
       .then((response) => response.json())

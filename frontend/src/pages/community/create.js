@@ -23,7 +23,7 @@ const Create = () => {
     };
 
     // Send the POST request to the API endpoint
-    fetch("https://tsec-hack-allstackers.onrender.com/message", requestOptions)
+    fetch("https://nutrisafe.onrender.com/message", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error))

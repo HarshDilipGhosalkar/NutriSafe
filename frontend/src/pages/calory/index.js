@@ -25,7 +25,7 @@ const MyComponent = () => {
       setLoading(true);
 
       // Remove or update the Content-Type header
-      fetch('https://tsec-hack-allstackers.onrender.com/imageToItems', {
+      fetch('https://nutrisafe.onrender.com/imageToItems', {
         method: 'POST',
         body: formData,
         mode: 'cors',
@@ -82,7 +82,7 @@ const MyComponent = () => {
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://tsec-hack-allstackers.onrender.com/calculateCalories',
+        url: 'https://nutrisafe.onrender.com/calculateCalories',
         headers: {
           'Content-Type': 'application/json'
         },

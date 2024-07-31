@@ -20,7 +20,7 @@ const AlertComponent = () => {
             redirect: 'follow'
         };
 
-        fetch("https://tsec-hack-allstackers.onrender.com/report", requestOptions)
+        fetch("https://nutrisafe.onrender.com/report", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result)
@@ -37,7 +37,7 @@ const AlertComponent = () => {
             redirect: 'follow'
         };
 
-        fetch("https://tsec-hack-allstackers.onrender.com/report", requestOptions)
+        fetch("https://nutrisafe.onrender.com/report", requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result.data);
